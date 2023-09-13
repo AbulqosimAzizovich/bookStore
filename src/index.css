@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+
+@font-face {
+  font-family: Rotter;
+  src: url(./assets/fonts/Rotter.otf);
+}
+
+@font-face {
+  font-family: SteinbeckRegular;
+  src: url(./assets/fonts/Steinbeck.otf);
+}
+
+@font-face {
+  font-family: HelveticaNeueCyrLight;
+  src: url(./assets/fonts/HelveticaNeueCyr-Light.ttf);
+}
+
+@font-face {
+  font-family: Visuelt;
+  src: url(./assets/fonts/Visuelt.ttf);
+}
+
+@font-face {
+  font-family: ArialBlack;
+  src: url(./assets/fonts/arial_black.ttf);
+}
+
+a {
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+}
+
+body {
+  font-family: SteinbeckRegular;
+}
+
+.container{
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+
