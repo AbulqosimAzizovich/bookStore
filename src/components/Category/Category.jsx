@@ -10,16 +10,16 @@ const Category = () => {
                     <h2 className='text-[#C9AC8C] text-center uppercase text-[31px] font-["Rotter"] mb-5'>Asosiy kategoriyalar</h2>
                     <nav className='mb-10'>
                         <ul className='flex items-center justify-center gap-x-[49px] text-[20px] text-gray-400'>
-                            <li className='p-[10px]'>
+                            <li className='p-[10px] hover:text-[#C9AC8C]'>
                                 <a href="#">Temuriylar davri </a>
                             </li>
-                            <li className='p-[10px]'>
+                            <li className='p-[10px] hover:text-[#C9AC8C]'>
                                 <a href="#">Jadid adabiyoti  </a>
                             </li>
-                            <li className='p-[10px]'>
+                            <li className='p-[10px] hover:text-[#C9AC8C]'>
                                 <a href="#">Sovet davri  </a>
                             </li>
-                            <li className='p-[10px]'>
+                            <li className='p-[10px] hover:text-[#C9AC8C]'>
                                 <a href="#">Mustaqillik davri </a>
                             </li>
                         </ul>
