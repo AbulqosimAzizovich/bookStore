@@ -65,6 +65,7 @@ const AuthorModal = ({ modal2, countryList, modal }) => {
     const [{ f_name, l_name, b_date, d_date, country_id, bio, image }, dispatch] = useReducer(reducer, intState);
 
     const addAuthor = () => {
+        btnEnable(true)
         const newAuthor = {
             first_name: f_name,
             last_name: l_name,
@@ -75,7 +76,7 @@ const AuthorModal = ({ modal2, countryList, modal }) => {
             image: image
         }
 
-        if (Object.keys(newAuthor?.image).length &&
+        if (
             newAuthor?.first_name?.length &&
             newAuthor?.last_name?.length &&
             newAuthor?.date_birth?.length &&
@@ -84,10 +85,11 @@ const AuthorModal = ({ modal2, countryList, modal }) => {
             newAuthor?.bio?.length) {
 
             useAuthor.createAuthor(newAuthor).then((res) => {
-                console.log(res)
+                
                 toast.success("Muallif qo'shildi!", { autoClose: 1000})
-                dispatch({ type: "CLEAR_AUTHOR_INPUT" });
                 btnEnable(false);
+                dispatch({ type: "CLEAR_AUTHOR_INPUT" });
+               
                 setTimeout(() => {
                     modal();
                 }, 1000)
@@ -101,7 +103,7 @@ const AuthorModal = ({ modal2, countryList, modal }) => {
 
 
         } else {
-            toast.warn("Hamma qatorni to'ltiring!", { autoClose: 1000})
+            toast.warn("Hamma qatorni to'ldiring!", { autoClose: 1000})
         }
 
     }

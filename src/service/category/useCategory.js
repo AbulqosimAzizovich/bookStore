@@ -11,7 +11,7 @@ const headers =  {
 }
 
 const useCategory = {
-    createCategory: (data) => api.post("/category", data),
+    createCategory: (data) => api.post("/category", data, {headers}),
     getCategory: () => api.get("/category", {headers}),
     getCategoryItem: (id) => api.get(`/category/${id}`, {headers}),
     updateCategory: (id,data) => api.put(`/category/${id}`, data),

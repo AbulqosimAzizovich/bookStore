@@ -21,10 +21,10 @@ const SignIn = () => {
 
             if(res.status === 201 && localStorage.getItem("token")){
 
-                toast.success("Tizimga kirdiniz!")
+                toast.success("Tizimga kirdiniz!", {autoClose: 1000})
                 setTimeout(() => {
                     navigate("/");
-                }, 2000)
+                }, 1000)
                 
             }
             

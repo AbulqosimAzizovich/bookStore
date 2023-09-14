@@ -1,0 +1,13 @@
+header .active {
+  color: #C9AC8C;
+  position: relative;
+  &::after {
+    content: "";
+    background-color: #C9AC8C;
+    top: 50px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+  }
+}

@@ -32,19 +32,19 @@ const index = () => {
 
           <div className="flex items-center gap-x-[130px]">
             <ul className="flex items-center gap-x-[23.5px] font-['HelveticaNeueCyrLight'] text-[16px]">
-              <li className="hover:text-[#C9AC8C]">
+              <li>
                 <NavLink to="/">Bosh sahifa</NavLink>
               </li>
-              <li className="hover:text-[#C9AC8C]">
+              <li>
                 <NavLink to="/nasr">Nasr</NavLink>
               </li>
-              <li className="hover:text-[#C9AC8C]">
+              <li>
                 <NavLink to="/nazm">Nazm</NavLink>
               </li>
-              <li className="hover:text-[#C9AC8C]">
+              <li>
                 <NavLink to="/maqola">Maqolalar</NavLink>
               </li>
-              <li className="hover:text-[#C9AC8C]">
+              <li>
                 <NavLink to="/forum">Forum</NavLink>
               </li>
             </ul>
