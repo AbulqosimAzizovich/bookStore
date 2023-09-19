@@ -6,7 +6,7 @@ import { Textarea } from "flowbite-react";
 import useAuthor from "../../service/author/useAuthor";
 
 
-const AuthorModal = ({ modal2, countryList, modal }) => {
+const AuthorModal = ({ modal2, countryList, modal}) => {
 
     const [btnDisable, btnEnable] = useState(false);
 
@@ -24,7 +24,6 @@ const AuthorModal = ({ modal2, countryList, modal }) => {
 
 
     const setImage = (value) => {
-        
         dispatch({ type: "SET_IMAGE", payload: value })
     }
 
@@ -75,7 +74,7 @@ const AuthorModal = ({ modal2, countryList, modal }) => {
             bio: bio,
             image: image
         }
-
+      
         if (
             newAuthor?.first_name?.length &&
             newAuthor?.last_name?.length &&
@@ -113,7 +112,8 @@ const AuthorModal = ({ modal2, countryList, modal }) => {
             <Modal
                 okText="Saqlash"
                 cancelText="Bekor qilish"
-                title="Muallif qushish"
+                // title={t?.addAuthor}
+                title="Muallif qo'shish"
                 open={modal2}
                 onOk={() => addAuthor()}
                 onCancel={() => modal()}

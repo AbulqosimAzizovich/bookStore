@@ -1,10 +1,9 @@
 header .active {
-  color: #C9AC8C;
   position: relative;
   &::after {
     content: "";
-    background-color: #C9AC8C;
-    top: 50px;
+    background-color: rgb(231, 198, 126);
+    top: 110%;
     left: 0;
     position: absolute;
     width: 100%;

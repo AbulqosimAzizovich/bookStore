@@ -15,10 +15,10 @@ const SignIn = () => {
         const user = {email: values.username, password: values.password};
 
         useAuth.login(user).then((res) => {
-          
+           
             localStorage.setItem("token", res?.data?.token);
             localStorage.setItem("user", res?.data?.user?.first_name);
-
+            localStorage.setItem("my_id", res.data?.user?.id);
             if(res.status === 201 && localStorage.getItem("token")){
 
                 toast.success("Tizimga kirdiniz!", {autoClose: 1000})

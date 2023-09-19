@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter } from "react-router-dom";
@@ -12,7 +10,6 @@ import Maqolalar from "../pages/Maqolalar";
 import Forum from "../pages/Forum";
 
 import NotFound from "../pages/NotFound";
-
 
 import SingUp from "../pages/Auth/SignUp";
 import SingIn from "../pages/Auth/SignIn";
@@ -32,86 +29,85 @@ import AuthorDetails from "../pages/Details/AuthorDetails";
 import BookDetails from "../pages/Details/BookDetails";
 
 const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <NotFound />,
+    children: [
+      {
         path: "/",
-        element: <Layout />,
-        errorElement: <NotFound />,
-        children: [
-            {
-                path: "/",
-                element: <Home />
-            },
-            {
-                path: "/author",
-                element: <Author />
-            },
-            {
-                path: "/books",
-                element: <Books />
-            },
-            {
-                path: "/author/:id",
-                element: <AuthorDetails />
-            },
-            {
-                path: "/books/:id",
-                element: <BookDetails />
-            },
-            {
-                path: "/nasr",
-                element: <Nasr />
-            },
-            {
-                path: "/nazm",
-                element: <Nazm />
-            },
-            {
-                path: "/maqola",
-                element: <Maqolalar />
-            },
-            {
-                path: "/forum",
-                element: <Forum />
-            },
-            {
-                path: "/profile",
-                element: <Profile />
-            }
+        element: <Home />,
+      },
+      {
+        path: "/author",
+        element: <Author />,
+      },
+      {
+        path: "/books",
+        element: <Books />,
+      },
+      {
+        path: "/author/:id",
+        element: <AuthorDetails />,
+      },
+      {
+        path: "/books/:id",
+        element: <BookDetails />,
+      },
+      {
+        path: "/nasr",
+        element: <Nasr />,
+      },
+      {
+        path: "/nazm",
+        element: <Nazm />,
+      },
+      {
+        path: "/maqola",
+        element: <Maqolalar />,
+      },
+      {
+        path: "/forum",
+        element: <Forum />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+    ],
+  },
+  {
+    path: "/settings",
+    element: <SettingPage />,
+    children: [
+      {
+        path: "my-account",
+        element: <MyAccount />,
+      },
+      {
+        path: "security",
+        element: <Security />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
+      },
+    ],
+  },
 
-        ]
-    },
-    {
-        path: "/settings",
-        element: <SettingPage />,
-        children: [
-            {
-                path: "my-account",
-                element: <MyAccount />
-            },
-            {
-                path: "security",
-                element: <Security />
-            },
-            {
-                path: "setting",
-                element: <Setting />
-            }
-        ]
-    },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
 
-    {
-        path: "/dashboard",
-        element: <Dashboard />
-    },
-
-    {
-        path: "/signup",
-        element: <SingUp />
-    },
-    {
-        path: "/signin",
-        element: <SingIn />
-    }
+  {
+    path: "/signup",
+    element: <SingUp />,
+  },
+  {
+    path: "/signin",
+    element: <SingIn />,
+  },
 ]);
 
 export default router;

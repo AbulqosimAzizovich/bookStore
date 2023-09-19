@@ -7,12 +7,7 @@ const headers = {
 
 
 const useBook = {
-    createBook: (data) => api.post("/book", data, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
-    }),
+    createBook: (data) => api.post("/book", data, {headers}),
     getBook: () => api.get("/book", {
         headers
     }),

@@ -1,0 +1,38 @@
+
+export const uz = {
+
+    home: "Bosh sahifa",
+    nasr: "Nasr",
+    nazm: "Nazm",
+    blogs: "Maqolalar",
+    forum: "Forum",
+    profile: "Profil",
+    dashboard: "Maydon",
+    settings: "Sozlamalar",
+    logout: "Chiqish",
+    search: "Qidirish",
+    mainCategories: "Asosiy bo'limlar",
+    searchPlaceholder: "Kitoblar, Audiolar, Maqolalar",
+    security: "Xafsizlik",
+    theme: "Mavzu",
+    save: "Saqlash",
+    updateData: "Ma'lumotlarni yangilash",
+    currentPassword: "Hozirgi parol",
+    newPassword: "Yangi parol",
+    confirmPassword: "Parolni tastiqlash",
+    myAccountTitle: "Mening sahifam",
+    name: "Ism",
+    surname: "Sharif",
+    totalBase: "Umimiy baza",
+    addCountry: "Davlat qo'shish",
+    addAuthor: "Muallif qo'shish",
+    addCategory: "Kategoriya qo'shish",
+    addBook: "Kitob qo'shish",
+    countries: "Davlatlar",
+    authors: "Mualliflar",
+    categories: "Kategoriyalar",
+    books: "Kitoblar",
+    tel: "Tel",
+    email: "Email"
+    
+}

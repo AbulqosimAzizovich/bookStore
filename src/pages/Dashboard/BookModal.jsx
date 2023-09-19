@@ -1,11 +1,13 @@
 
 import { useReducer, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { Modal, Input, Select } from "antd";
+import { Modal, Input } from "antd";
 import { Textarea } from "flowbite-react";
 import useBook from "../../service/book/useBook";
-
+import useFile from '../../service/fileUpload/useFile';
 const BookModal = ({ modal3, modal, categoryList, countryList, authorList }) => {
+
+    const [btnDisable, btnEnable] = useState(false);
 
     const initState = {
         title: "",
@@ -39,6 +41,9 @@ const BookModal = ({ modal3, modal, categoryList, countryList, authorList }) => 
                 return { ...state, description: action.description };
             case "SET_BOOK_COVER":
                 return { ...state, book_cover: action.book_cover };
+
+            case "CLEAR_BOOK_INPUT":
+                return { ...state, title: " ", pages: " ", year: " ", price: " ", country_id: " ", author_id: " ", category_id: " ", description: " ", book_cover: " " };
             default:
                 return state;
         }
@@ -47,46 +52,63 @@ const BookModal = ({ modal3, modal, categoryList, countryList, authorList }) => 
     const [{ title, pages, year, price, country_id, author_id, category_id, description, book_cover }, dispatch] = useReducer(reducer, initState);
 
 
+
     const addBook = () => {
+        btnEnable(true)
         const newBook = {
             title,
-            pages, 
-            year, 
-            price, 
-            country_id, 
-            author_id, 
-            category_id, 
-            description, 
+            pages,
+            year,
+            price,
+            country_id,
+            author_id,
+            category_id,
+            description,
             book_cover
         }
 
-        if(
-            newBook.title.trim().length && 
-            newBook.pages.trim().length &&
-            newBook.year.trim().length &&
-            newBook.country_id.trim().length &&
-            newBook.category_id.trim().length &&
-            newBook.description.trim().length &&
-            newBook.book_cover.name &&
-            newBook.author_id.trim().length &&
-            String(newBook.category_id).trim().length       
-        ){
-            useBook.createBook({...newBook,
-                country_id: Number(newBook.country_id), 
-                category_id: Number(newBook.category_id), 
-                author_id: Number(newBook.author_id)}).then((res) => {
-                
-                toast.success("Kitob qo'shildi!", { autoClose: 1000})
+        if (
+            newBook?.title?.length &&
+            newBook?.pages?.length &&
+            newBook?.year?.length &&
+            newBook?.price?.length &&
+            newBook?.country_id?.length &&
+            newBook?.author_id?.length &&
+            newBook?.category_id?.length &&
+            newBook?.description?.length
+        ) {
+            newBook.country_id = Number(newBook.country_id);
+            newBook.category_id = Number(newBook.category_id);
+            newBook.author_id = Number(newBook.author_id);
 
-                // setTimeout(() => {
-                //     modal();
-                // }, 1000)
+            useBook.createBook(newBook).then((res) => {
+
+                toast.success("Kitob qo'shildi!", { autoClose: 1000 })
+                btnEnable(false);
+                dispatch({ type: "CLEAR_BOOK_INPUT" });
+
+                setTimeout(() => {
+                    modal();
+                }, 1000)
             }).catch((err) => {
-                toast.error("Error!", {autoClose: 1000})
+
+                toast.error("Error!", { autoClose: 1000 })
             })
-        }else{
-            toast.warn("Hamma qatorni to'ldiring!", { autoClose: 1000})
+        } else {
+            toast.warn("Hamma qatorni to'ldiring!", { autoClose: 1000 })
         }
+    }
+
+
+    const upload = (file) => {
+        const image = new FormData();
+        image.append("image", file);
+
+        useFile.uploadFile(image).then((res) => {
+            dispatch({ type: "SET_BOOK_COVER", book_cover: res.data })
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     return (
@@ -95,15 +117,17 @@ const BookModal = ({ modal3, modal, categoryList, countryList, authorList }) => 
             <Modal
                 okText="Saqlash"
                 cancelText="Bekor qilish"
-                title="Kitob qushish"
+                // title={t?.addBook}
+                title="Kitob qo'shish"
                 open={modal3}
                 onOk={() => addBook()}
                 onCancel={() => modal()}
                 width={"1000px"}
+                okButtonProps={{ disabled: btnDisable }}
             >
                 <div className="flex">
                     <div className="p-5 w-[400px]">
-                        <input onChange={(e) => dispatch({ type: "SET_BOOK_COVER", book_cover: e.target.files[0] })} type="file" accept="jpg/png" />
+                        <input type="file" accept='jpg/png' onChange={(e) => upload(e.target.files[0])} />
                     </div>
                     <div className="p-5 grow">
                         <Input
@@ -117,8 +141,8 @@ const BookModal = ({ modal3, modal, categoryList, countryList, authorList }) => 
                             type="number"
                             className=" rounded-lg py-3 mb-3"
                             placeholder="Sahifalar soni"
-                            value={pages}
-                            onChange={(e) => dispatch({ type: "SET_PAGEs", pages: e.target.value })}
+                            // value={pages}
+                            onChange={(e) => dispatch({ type: "SET_PAGES", pages: e.target.value })}
                         />
                         <Input
                             type="date"
@@ -134,34 +158,34 @@ const BookModal = ({ modal3, modal, categoryList, countryList, authorList }) => 
                             value={price}
                             onChange={(e) => dispatch({ type: "SET_PRICE", price: e.target.value })}
                         />
-                        <select onChange={(e) => dispatch({ type: "SET_COUNTRY", country_id: e.target.value })} className="py-3 block " id="countries" required defaultValue={'DEFAULT'}>
+                        <select onChange={(e) => dispatch({ type: "SET_COUNTRY", country_id: e.target.value })} className="w-full py-3 block mb-3" id="countries" required defaultValue={'DEFAULT'}>
                             <option disabled value="DEFAULT">
                                 Kitob davlatini tanglang
                             </option>
                             {
                                 countryList.length ? countryList.map((item) => {
-                                    return <option value={item.id}>{item?.name}</option>
+                                    return <option key={item.id} value={item.id}>{item?.name}</option>
                                 }) : <option value="0">Ma'lumot topilmadi!</option>
                             }
 
                         </select>
-                        <select onChange={(e) => dispatch({ type: "SET_CATEGORY", category_id: e.target.value })} className="py-3 block" id="categories" required defaultValue={'DEFAULT'}>
+                        <select onChange={(e) => dispatch({ type: "SET_CATEGORY", category_id: e.target.value })} className="w-full py-3 block mb-3" id="categories" required defaultValue={'DEFAULT'}>
                             <option disabled value="DEFAULT">
                                 Kitob kategoriyasini tanglang
                             </option>
                             {
                                 categoryList.length ? categoryList.map((item) => {
-                                    return <option value={item.id}>{item?.name}</option>
+                                    return <option key={item.id} value={item.id}>{item?.name}</option>
                                 }) : <option value="0">Ma'lumot topilmadi!</option>
                             }
                         </select>
-                        <select onChange={(e) => dispatch({ type: "SET_AUTHOR", author_id: e.target.value })} className="py-3 block" id="author" required defaultValue={'DEFAULT'}>
+                        <select onChange={(e) => dispatch({ type: "SET_AUTHOR", author_id: e.target.value })} className="w-full py-3 block mb-3" id="author" required defaultValue={'DEFAULT'}>
                             <option disabled value="DEFAULT">
                                 Kitob muallifini tanglang
                             </option>
                             {
                                 authorList.length ? authorList.map((item) => {
-                                    return <option value={item.id}>{item?.first_name} {item?.last_name}</option>
+                                    return <option key={item.id} value={item.id}>{item?.first_name} {item?.last_name}</option>
                                 }) : <option value="0">Ma'lumot topilmadi!</option>
                             }
 

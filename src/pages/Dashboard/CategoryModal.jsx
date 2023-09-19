@@ -6,7 +6,7 @@ import { Modal, Input} from "antd";
 import useCategory from "../../service/category/useCategory";
 
 
-const CategoryModal = ({ modal4, modal }) => {
+const CategoryModal = ({ modal4, modal}) => {
     const [btnDisable, btnEnable] = useState(false);
     const [name, setName] = useState("")
 
@@ -36,7 +36,8 @@ const CategoryModal = ({ modal4, modal }) => {
             <Modal
                 okText="Saqlash"
                 cancelText="Bekor qilish"
-                title="Kategoriya qushish"
+                // title={t?.addCategory}
+                title="Kategoriya qo'shish"
                 open={modal4}
                 onOk={() => addCategory()}
                 onCancel={() => modal()}
